@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product generation using XML and XSLT</title>
+    <style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+    </style>
+</head>
+<body>
+    <h1>Product list generation using XML, XSLT, Nginx, SSI</h1>
+
+    <!-- set default value for SSI variable "data" -->
+    <!--#set var="data" value="" -->
+
+    <!-- get "data" value from URL -->
+    <!--#if expr="$QUERY_STRING = /\bdata=([a-zA-Z0-9]+)/" -->
+    <!--#set var="data" value="$1" -->
+    <!--#endif -->
+
+    <!--#echo var="data" -->
+
+    <!--#include virtual="/products/index.xml?brand=${data}" set="products" wait="yes" -->
+    <!--#echo var="products" encoding="none" -->
+</body>
+</html>

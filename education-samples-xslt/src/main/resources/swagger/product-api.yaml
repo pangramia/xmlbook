@@ -1,0 +1,126 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Product App
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths
+basePath: /api/v1
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /products:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: get_products
+    get:
+      operationId: getProducts
+      description: "Provide list of products, filtered out by brand or nationwide. The list supports paging."
+      parameters:
+        - name: brand
+          in: query
+          description: The name of the brand to filter out products
+          type: string
+        - name: pageSize
+          in: query
+          description: Number of products returned
+          type: number
+          format: integer
+        - name: pageNumber
+          in: query
+          description: Page number
+          type: number
+          format: integer
+        - $ref: "#/parameters/currency"
+
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Product"
+        # responses may fall through to errors
+        500:
+          description: An unexpected error occured.
+          schema:
+            $ref: "#/definitions/Error"
+
+  /products/{productId}:
+  # binds a127 app logic to a route
+    x-swagger-router-controller: get_product
+    get:
+      summary: Gets a certain product
+      description: Returns a single product for its ID
+      # used as the method name of the controller
+      operationId: getProduct
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The product's id
+          type: string
+        - $ref: "#/parameters/currency"
+      responses:
+        200:
+          description: A Product
+          schema:
+            $ref: "#/definitions/Product"
+        404:
+          description: The Product does not exists.
+        # responses may fall through to errors
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier of the product
+      name:
+        type: string
+        description: Short name of the product to be appeared as title
+      description:
+        type: string
+        description: Full description of the product with appropriate details
+      price:
+        type: number
+        format: float
+        description: Price in a given currency
+      currencyCode:
+        type: string
+        description: "Used [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) as currency code"
+      image:
+        type: string
+        description: Image URL representing the product.
+
+  Error:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+
+responses:
+  Standard500ErrorResponse:
+    description: An unexpected error occured.
+    schema:
+      $ref: "#/definitions/Error"
+
+parameters:
+  currency:
+    name: currency
+    in: query
+    description: "Preferred currency to use for price conversion, use [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) as currency code"
+    type: string
