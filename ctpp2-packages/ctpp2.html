@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<title>The CT++ template language (2.8 version)</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7056 2011-06-17 10:50:48Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="the-ct-template-language-2-8-version">
+<h1 class="title">The CT++ template language (2.8 version)</h1>
+
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#templates" id="id2">Templates</a><ul>
+<li><a class="reference internal" href="#comments" id="id3">Comments</a></li>
+<li><a class="reference internal" href="#formatting" id="id4">Formatting</a></li>
+<li><a class="reference internal" href="#including" id="id5">Including</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#variables" id="id6">Variables</a><ul>
+<li><a class="reference internal" href="#arrays" id="id7">Arrays</a></li>
+<li><a class="reference internal" href="#mappings" id="id8">Mappings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-flow" id="id9">Control flow</a><ul>
+<li><a class="reference internal" href="#choice" id="id10">Choice</a></li>
+<li><a class="reference internal" href="#loops" id="id11">Loops</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions" id="id12">Functions</a></li>
+<li><a class="reference internal" href="#blocks" id="id13">Blocks</a></li>
+<li><a class="reference internal" href="#id1" id="id14">Library reference</a><ul>
+<li><a class="reference internal" href="#msgid-msgid-plural-n-domain" id="id15">_ <em>(msgid[, msgid_plural, n][, domain])</em></a></li>
+<li><a class="reference internal" href="#avg-flag-a-b" id="id16">AVG <em>(flag, a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#base64-decode-x" id="id17">BASE64_DECODE <em>(x)</em></a></li>
+<li><a class="reference internal" href="#base64-encode-x" id="id18">BASE64_ENCODE <em>(x)</em></a></li>
+<li><a class="reference internal" href="#cast-flag-x" id="id19">CAST <em>(flag, x)</em></a></li>
+<li><a class="reference internal" href="#concat-a-b" id="id20">CONCAT <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#context" id="id21">CONTEXT <em>()</em></a></li>
+<li><a class="reference internal" href="#date-format-x-format" id="id22">DATE_FORMAT <em>(x, format)</em></a></li>
+<li><a class="reference internal" href="#default-x-y" id="id23">DEFAULT <em>(x, y)</em></a></li>
+<li><a class="reference internal" href="#defined-a-b" id="id24">DEFINED <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#error" id="id25">ERROR <em>()</em></a></li>
+<li><a class="reference internal" href="#form-param-x-y" id="id26">FORM_PARAM <em>(x, y)</em></a></li>
+<li><a class="reference internal" href="#gettext-msgid-msgid-plural-n-domain" id="id27">GETTEXT <em>(msgid[, msgid_plural, n][, domain])</em></a></li>
+<li><a class="reference internal" href="#get-type-x" id="id28">GET_TYPE <em>(x)</em></a></li>
+<li><a class="reference internal" href="#hash-keys-x" id="id29">HASH_KEYS <em>(x)</em></a></li>
+<li><a class="reference internal" href="#hmac-md5-x-key" id="id30">HMAC_MD5 <em>(x, key)</em></a></li>
+<li><a class="reference internal" href="#hostname" id="id31">HOSTNAME <em>()</em></a></li>
+<li><a class="reference internal" href="#href-param-x-y" id="id32">HREF_PARAM <em>(x, y)</em></a></li>
+<li><a class="reference internal" href="#htmlescape-a-b" id="id33">HTMLESCAPE <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#iconv-x-src-dst-flags" id="id34">ICONV <em>(x, src, dst[, flags])</em></a></li>
+<li><a class="reference internal" href="#in-array-x-array" id="id35">IN_ARRAY <em>(x, array)</em></a></li>
+<li><a class="reference internal" href="#in-set-x-a-b" id="id36">IN_SET <em>(x, a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#jsonescape-a-b" id="id37">JSONESCAPE <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#json-x" id="id38">JSON <em>(x)</em></a></li>
+<li><a class="reference internal" href="#list-element-a-b-x" id="id39">LIST_ELEMENT <em>(a[, b, ...], x)</em></a></li>
+<li><a class="reference internal" href="#list-a-b" id="id40">LIST <em>([a, b, ...])</em></a></li>
+<li><a class="reference internal" href="#log-x-base" id="id41">LOG <em>(x[, base])</em></a></li>
+<li><a class="reference internal" href="#max-a-b" id="id42">MAX <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#mb-size-x" id="id43">MB_SIZE <em>(x)</em></a></li>
+<li><a class="reference internal" href="#mb-substr-x-offset-bytes-y" id="id44">MB_SUBSTR <em>(x, offset[, bytes[, y]]])</em></a></li>
+<li><a class="reference internal" href="#mb-truncate-x-offest-addon" id="id45">MB_TRUNCATE <em>(x, offest[, addon])</em></a></li>
+<li><a class="reference internal" href="#md5-a-b" id="id46">MD5 <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#min-a-b" id="id47">MIN <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#num-format-x-y" id="id48">NUM_FORMAT <em>(x, y)</em></a></li>
+<li><a class="reference internal" href="#obj-dump-a-b" id="id49">OBJ_DUMP <em>([a, b, ...])</em></a></li>
+<li><a class="reference internal" href="#random-min-max" id="id50">RANDOM <em>([[min,] max])</em></a></li>
+<li><a class="reference internal" href="#size-x" id="id51">SIZE <em>(x)</em></a></li>
+<li><a class="reference internal" href="#sprintf-format-a-b" id="id52">SPRINTF <em>(format, a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#substr-x-offset-bytes-y" id="id53">SUBSTR <em>(x, offset[, bytes[, y]]])</em></a></li>
+<li><a class="reference internal" href="#truncate-x-offest-addon" id="id54">TRUNCATE <em>(x, offest[, addon])</em></a></li>
+<li><a class="reference internal" href="#uriescape-a-b" id="id55">URIESCAPE <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#urlescape-a-b" id="id56">URLESCAPE <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#version-x" id="id57">VERSION <em>([x])</em></a></li>
+<li><a class="reference internal" href="#wmlescape-a-b" id="id58">WMLESCAPE <em>(a[, b, ...])</em></a></li>
+<li><a class="reference internal" href="#xmlescape-a-b" id="id59">XMLESCAPE <em>(a[, b, ...])</em></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="templates">
+<h1><a class="toc-backref" href="#id2">Templates</a></h1>
+<blockquote>
+<p>A template is a text file, that is marked-up using the CT++ template
+language. It used to separate content from presentation in web design.</p>
+<p>A template can contain CT++ tags. All CT++ tags have HTML-like syntax and
+they start with <span class="tmpl">TMPL_</span>. Names of CT++ tags are case insensetive (for
+example, <span class="tmpl">TMPL_var</span>, <span class="tmpl">tmpl_var</span>, or <span class="tmpl">TmPl_VaR</span>).</p>
+<p>CT++ supports the next tags: <span class="tmpl">TMPL_var</span>, <span class="tmpl">TMPL_if</span>,
+<span class="tmpl">TMPL_elsif</span>, <span class="tmpl">TMPL_else</span>, <span class="tmpl">TMPL_unless</span>,
+<span class="tmpl">TMPL_foreach</span>, <span class="tmpl">TMPL_include</span>, <span class="tmpl">TMPL_comment</span>,
+<span class="tmpl">TMPL_block</span>, <span class="tmpl">TMPL_call</span>, and <span class="tmpl">TMPL_verbose</span>.</p>
+<p>Example of a template:</p>
+<pre class="literal-block">
+&lt;!DOCTYPE html&gt;
+<span class="tmpl">&lt;TMPL_include 'includes/html_lang.tmpl'&gt;</span>
+<span class="tmpl">&lt;TMPL_include 'includes/html_head.tmpl'&gt;</span>
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/m.posts.css&quot;&gt;
+&lt;/head&gt;
+&lt;body class=&quot;posts&quot;&gt;
+    &lt;div id=&quot;body-wrapper&quot; class=&quot;body-wrapper&quot;&gt;
+        &lt;div id=&quot;content-wrapper&quot; class=&quot;content-wrapper&quot;&gt;
+            <span class="tmpl">&lt;TMPL_include 'includes/header.tmpl'&gt;</span>
+            &lt;section role=&quot;main&quot; class=&quot;content-column&quot;&gt;
+                &lt;h1&gt;<span class="tmpl">&lt;TMPL_var _(&quot;Welcome to&quot;)&gt;</span> <span class="tmpl">&lt;TMPL_var project_name&gt;</span>, <span class="tmpl">&lt;TMPL_verbose&gt;</span>
+                <span class="tmpl">&lt;TMPL_if logged&gt;</span>
+                    <span class="tmpl">&lt;TMPL_var HTMLESCAPE(DEFAULT(user_info.name, user_info.username))&gt;</span>
+                <span class="tmpl">&lt;TMPL_else&gt;</span>
+                    <span class="tmpl">&lt;TMPL_var _(&quot;Anonymous&quot;)&gt;</span>
+                <span class="tmpl">&lt;/TMPL_if&gt;</span>&lt;/h1&gt;
+                <span class="tmpl">&lt;/TMPL_verbose&gt;</span>
+
+                <span class="tmpl">&lt;TMPL_verbose&gt;</span>
+                <span class="tmpl">&lt;TMPL_foreach users as user&gt;</span>
+                    &lt;h3&gt;&lt;a class=&quot;user-page-link&quot; href=&quot;/user/<span class="tmpl">&lt;TMPL_var URLESCAPE(user.username)&gt;</span>&quot; title=&quot;
+                        <span class="tmpl">&lt;TMPL_var HTMLESCAPE(DEFAULT(user.name, user.username))&gt;&quot;&gt;</span>
+                        <span class="tmpl">&lt;TMPL_var HTMLESCAPE(DEFAULT(user.name, user.username))&gt;</span>
+                        &lt;/a&gt;&lt;/h3&gt;
+                <span class="tmpl">&lt;/TMPL_foreach&gt;
+                &lt;/TMPL_verbose&gt;</span>
+
+            &lt;/section&gt;
+            <span class="tmpl">&lt;TMPL_include 'includes/noscript_alert.tmpl'&gt;</span>
+        &lt;/div&gt;
+    &lt;/div&gt;
+    <span class="tmpl">&lt;TMPL_include 'includes/footer.tmpl'&gt;</span>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</blockquote>
+<div class="section" id="comments">
+<h2><a class="toc-backref" href="#id3">Comments</a></h2>
+<blockquote>
+<p>Use the <span class="tmpl">TMPL_comment</span> tag to comment-out part of a template.</p>
+<p>For example:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_comment&gt;</span>&lt;h3&gt;Hello, <span class="tmpl">&lt;TMPL_var username&gt;</span>!&lt;/h3&gt;<span class="tmpl">&lt;/TMPL_comment&gt;</span>
+</pre>
+</blockquote>
+</div>
+<div class="section" id="formatting">
+<h2><a class="toc-backref" href="#id4">Formatting</a></h2>
+<blockquote>
+<p>The <span class="tmpl">TMPL_verbose</span> tag removes white-space characters (space,
+form-feed, newline, carriage return, horizontal tab, and vertical tab)
+between CT++ tags.</p>
+<p>For example:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_verbose&gt;</span>
+    foo: <span class="tmpl">&lt;TMPL_var foo&gt;</span> some text
+    bar: <span class="tmpl">&lt;TMPL_var bar&gt;</span> baz: <span class="tmpl">&lt;TMPL_var baz&gt;</span> <span class="tmpl">&lt;TMPL_var spam&gt;</span>
+<span class="tmpl">&lt;/TMPL_verbose&gt;</span>
+</pre>
+<p>For instance, variables foo, bar, baz, and spam are respectively
+<span class="const">&quot;{FOO}&quot;</span>, <span class="const">&quot;{BAR}&quot;</span>, <span class="const">&quot;{BAZ}&quot;</span>, and
+<span class="const">&quot;{SPAM}&quot;</span>. The template would be rendered as:</p>
+<pre class="literal-block">
+foo:{FOO}some text
+    bar:{BAR}baz:{BAZ}{SPAM}
+</pre>
+<p>Also, a dash could be used instead the <span class="tmpl">TMPL_verbose</span> tag:</p>
+<pre class="literal-block">
+foo: <span class="tmpl">&lt;TMPL_var foo-&gt;</span> some text
+    bar: <span class="tmpl">&lt;-TMPL_var bar-&gt;</span> baz: <span class="tmpl">&lt;-TMPL_var baz-&gt;</span> <span class="tmpl">&lt;-TMPL_var spam&gt;</span>
+</pre>
+<p>There will same output.</p>
+</blockquote>
+</div>
+<div class="section" id="including">
+<h2><a class="toc-backref" href="#id5">Including</a></h2>
+<blockquote>
+<p>The <span class="tmpl">TMPL_include</span> tag loads another template within the template.
+The tag has the one attribute only. The attribute can't be a variable.
+It's a filename in quotes:</p>
+<pre class="literal-block">
+&lt;TMPL_include &quot;filename.tmpl&quot;&gt;
+</pre>
+<p>It is impossible to break conditions and loops between templates.</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="variables">
+<h1><a class="toc-backref" href="#id6">Variables</a></h1>
+<blockquote>
+<p>The CT++ template engine evaluates variable and replaces it with the
+result. The <span class="tmpl">TMPL_var</span> tag is used for evaluating variables.</p>
+<p>The types of variables are undefined variable, string, integer,
+floating-point number, mapping, and array.  For undefined variables result
+is an empty string.</p>
+<p>The <span class="tmpl">TMPL_var</span> evaluates expressions: variables, operators, and
+functions. For example:</p>
+<pre class="literal-block">
+&lt;TMPL_var foo&gt;
+&lt;TMPL_var (foo + bar + 1)&gt;
+&lt;TMPL_var HTMLESCAPE(baz)&gt;
+</pre>
+</blockquote>
+<div class="section" id="arrays">
+<h2><a class="toc-backref" href="#id7">Arrays</a></h2>
+<blockquote>
+<p>An array is a data type consisting of a collection of elements, each
+identified by one array index.  The first element of the array is indexed
+by subscript of 0.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+&lt;TMPL_var foo[0]&gt;   &lt;- foo must be an array!
+&lt;TMPL_var foo[bar]&gt; &lt;- bar must be an integer!
+</pre>
+</blockquote>
+</div>
+<div class="section" id="mappings">
+<h2><a class="toc-backref" href="#id8">Mappings</a></h2>
+<blockquote>
+<p>A mapping is a data type composed of a collection of (key,value)
+pairs, such that each possible key appears at most once in the collection.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+&lt;TMPL_var foo.key&gt; = &lt;TMPL_var foo[&quot;key&quot;]&gt; &lt;- foo must be a mapping
+&lt;TMPL_var foo.bar.baz&gt; &lt;- the mapping foo has the key &quot;bar&quot; with mapping value, that has the key &quot;baz&quot;
+</pre>
+<p>Use a dot to access attributes of a variable.</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="control-flow">
+<h1><a class="toc-backref" href="#id9">Control flow</a></h1>
+<div class="section" id="choice">
+<h2><a class="toc-backref" href="#id10">Choice</a></h2>
+<blockquote>
+<p>The <span class="tmpl">TMPL_if</span> tag and the <span class="tmpl">TMPL_unless</span> tag evaluate a
+condition.  A condition can be variable, function calls, arithmetic and
+logic expressions.  Arithmetic and logic expressions must be inside of
+parentheses.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_if foo&gt;</span>
+    Some text with <span class="tmpl">&lt;TMPL_var foo&gt;</span>
+<span class="tmpl">&lt;/TMPL_if&gt;</span>
+
+<span class="tmpl">&lt;TMPL_unless DEFINED(bar)&gt;</span>
+    Some text
+<span class="tmpl">&lt;TMPL_else&gt;</span>
+    Some text with <span class="tmpl">&lt;TMPL_var bar&gt;</span>
+<span class="tmpl">&lt;/TMPL_unless&gt;</span>
+
+<span class="tmpl">&lt;TMPL_if (x &lt; 1)&gt;</span>
+    eeny
+<span class="tmpl">&lt;TMPL_elsif (x &lt; 2)&gt;</span>
+    meeny
+<span class="tmpl">&lt;TMPL_elsif (x &lt; 3)&gt;</span>
+    miny
+<span class="tmpl">&lt;TMPL_else&gt;</span>
+    moe
+<span class="tmpl">&lt;/TMPL_if&gt;</span>
+</pre>
+<p>The following table summarizes the operator precedences, from highest
+precedence to lowest precedence:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="9%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Operators</th>
+<th class="head">Assoc</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>(expression)</td>
+<td>&nbsp;</td>
+<td>parentheses used for grouping</td>
+</tr>
+<tr><td>()</td>
+<td>LR</td>
+<td>parentheses used for a function call</td>
+</tr>
+<tr><td>.</td>
+<td>LR</td>
+<td>member selection</td>
+</tr>
+<tr><td>[]</td>
+<td>LR</td>
+<td>array/mapping element access</td>
+</tr>
+<tr><td>!, +, -</td>
+<td>RL</td>
+<td>logical not, unary plus, unary minus</td>
+</tr>
+<tr><td>*, /, mod, div</td>
+<td>LR</td>
+<td>multiplication and division</td>
+</tr>
+<tr><td>+, -</td>
+<td>LR</td>
+<td>addition and subtraction</td>
+</tr>
+<tr><td>&lt;, &lt;=, &gt;, &gt;=</td>
+<td>LR</td>
+<td>inequality relational</td>
+</tr>
+<tr><td>==, !=</td>
+<td>LR</td>
+<td>equality relational</td>
+</tr>
+<tr><td>&amp;&amp;</td>
+<td>LR</td>
+<td>logical and</td>
+</tr>
+<tr><td>||</td>
+<td>LR</td>
+<td>logical or</td>
+</tr>
+</tbody>
+</table>
+<p>CT++ defines keywords to act as aliases for a number of operators: lt (&lt;),
+le (&lt;=), gt (&gt;), ge (&gt;=), eq (==), ne (!=), and (&amp;&amp;), or (||).</p>
+</blockquote>
+</div>
+<div class="section" id="loops">
+<h2><a class="toc-backref" href="#id11">Loops</a></h2>
+<blockquote>
+<p>CT++ supports the <span class="tmpl">TMPL_foreach</span> only.   It use an explicit iterator,
+in which the loop variable takes on each of the values in an array or a
+mapping.</p>
+<p>An iterator has special attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Attribute</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>__index__</td>
+<td>index of array's element</td>
+</tr>
+<tr><td>__key__</td>
+<td>key in mapping</td>
+</tr>
+<tr><td>__first__</td>
+<td>&quot;true&quot; for first iteration</td>
+</tr>
+<tr><td>__last__</td>
+<td>&quot;true&quot; for last iteration</td>
+</tr>
+<tr><td>__inner__</td>
+<td>&quot;true&quot; if not first and not last iteration</td>
+</tr>
+<tr><td>__even__</td>
+<td>&quot;true&quot; for even iteration</td>
+</tr>
+<tr><td>__odd__</td>
+<td>&quot;true&quot; for odd iteration</td>
+</tr>
+<tr><td>__value__</td>
+<td>value of element</td>
+</tr>
+</tbody>
+</table>
+<p>Example of usage:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_foreach array as a&gt;</span>
+    value: <span class="tmpl">&lt;TMPL_var a&gt;</span> or <span class="tmpl">&lt;TMPL_var a.__value__&gt;</span>
+    index: <span class="tmpl">&lt;TMPL_var a.__index__&gt;</span>
+    <span class="tmpl">&lt;TMPL_if a.__first__&gt;</span>#first#<span class="tmpl">&lt;/TMPL_if&gt;</span>
+    <span class="tmpl">&lt;TMPL_if a.__even__&gt;</span>#even#<span class="tmpl">&lt;TMPL_else&gt;</span>#odd#<span class="tmpl">&lt;/TMPL_if&gt;</span>
+<span class="tmpl">&lt;/TMPL_foreach&gt;</span>
+
+<span class="tmpl">&lt;TMPL_foreach map as m&gt;</span>
+    value: <span class="tmpl">&lt;TMPL_var m&gt;</span> or <span class="tmpl">&lt;TMPL_var m.__value__&gt;</span>
+    key: <span class="tmpl">&lt;TMPL_var m.__key__&gt;</span>
+    <span class="tmpl">&lt;TMPL_if m.__last__&gt;</span>#last#<span class="tmpl">&lt;/TMPL_if&gt;</span>
+<span class="tmpl">&lt;/TMPL_foreach&gt;</span>
+</pre>
+<p>The <span class="tmpl">TMPL_break</span> tag breaks the iteration of loop:</p>
+<pre class="literal-block">
+&lt;TMPL_verbose&gt;
+&lt;TMPL_foreach LIST(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;) as char&gt;
+    &lt;TMPL_var char&gt;
+    &lt;TMPL_if (char == &quot;b&quot;)&gt;&lt;TMPL_break&gt;&lt;/TMPL_if&gt;
+&lt;/TMPL_foreach&gt;
+&lt;/TMPL_verbose&gt;
+</pre>
+<p>Output of the template is &quot;ab&quot;.</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="functions">
+<h1><a class="toc-backref" href="#id12">Functions</a></h1>
+<blockquote>
+<p>CT++ has built-in functions, that is described in <a class="reference internal" href="#library-reference">Library reference</a>.
+CT++ tags, that support it: <span class="tmpl">TMPL_var</span>, <span class="tmpl">TMPL_if</span>,
+<span class="tmpl">TMPL_unless</span>, <span class="tmpl">TMPL_elsif</span>, and <span class="tmpl">TMPL_foreach</span>.  For
+example:</p>
+<pre class="literal-block">
+&lt;TMPL_var <span class="func">SPRINTF</span>(<span class="func">GETTEXT</span>(&quot;%d minutes ago&quot;, min), min)&gt;
+
+&lt;TMPL_var <span class="func">DEFAULT</span>(<span class="func">HTMLESCAPE</span>(url), &quot;<a class="reference external" href="http://ctpp.havoc.ru">http://ctpp.havoc.ru</a>&quot;)&gt;
+
+&lt;TMPL_if (<span class="func">GET_TYPE</span>(var) == &quot;STRING&quot;)&gt;
+    &lt;TMPL_var <span class="func">GETTEXT</span>(&quot;var is string&quot;)&gt;
+&lt;/TMPL_if&gt;
+
+&lt;TMPL_foreach <span class="func">LIST</span>(&quot;eeny&quot;, &quot;meeny&quot;, &quot;miny&quot;, &quot;moe&quot;) as item&gt;
+    &lt;TMPL_var item&gt;
+&lt;/TMPL_foreach&gt;
+</pre>
+</blockquote>
+</div>
+<div class="section" id="blocks">
+<h1><a class="toc-backref" href="#id13">Blocks</a></h1>
+<blockquote>
+<p>A block is reusable piece of a template called by name.</p>
+<p>Example of usage:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_block &quot;simple-block&quot;&gt;</span>
+    Some text
+<span class="tmpl">&lt;/TMPL_block&gt;</span>
+</pre>
+<p>The <span class="tmpl">TMPL_call</span> tag is used for calling a block:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_call &quot;simple-block&quot;&gt;</span>
+<span class="tmpl">&lt;TMPL_call some_var&gt;</span>
+</pre>
+<p>A block can have arguments:</p>
+<pre class="literal-block">
+<span class="tmpl">&lt;TMPL_block 'some-block' args(a, b, c)&gt;</span>
+    <span class="tmpl">&lt;TMPL_var a&gt;</span>, <span class="tmpl">&lt;TMPL_var b&gt;</span>, and <span class="tmpl">&lt;TMPL_var c&gt;</span>
+<span class="tmpl">&lt;/TMPL_block&gt;</span>
+
+<span class="tmpl">&lt;TMPL_call 'some-block' args(foo, bar, baz)&gt;</span>
+</pre>
+<p>Definition blocks inside another blocks is forbidden.</p>
+</blockquote>
+</div>
+<div class="section" id="id1">
+<span id="library-reference"></span><h1><a class="toc-backref" href="#id14">Library reference</a></h1>
+<div class="section" id="msgid-msgid-plural-n-domain">
+<h2><a class="toc-backref" href="#id15">_ <em>(msgid[, msgid_plural, n][, domain])</em></a></h2>
+<p>See <a class="reference internal" href="#gettext">GETTEXT</a>.</p>
+</div>
+<div class="section" id="avg-flag-a-b">
+<h2><a class="toc-backref" href="#id16">AVG <em>(flag, a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Return average of <span class="arg">a[, b, ...]</span>, according to chosen algorithm by
+<span class="arg">flag</span>.  The values of <span class="arg">flag</span> are <span class="const">'a'</span> for arithmetic mean,
+<span class="const">'g'</span> for geometric mean, <span class="const">'h'</span> for harmonic mean, and <span class="const">'q'</span>
+for quadratic mean.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+AVG('a', 1, 2, 3) -&gt; 2
+AVG('g', 1, 2, 3) -&gt; 1.81712059283
+AVG('h', 1, 2, 3) -&gt; 1.63636363636
+AVG('q', 1, 2, 3) -&gt; 2.16024689947
+</pre>
+</blockquote>
+</div>
+<div class="section" id="base64-decode-x">
+<h2><a class="toc-backref" href="#id17">BASE64_DECODE <em>(x)</em></a></h2>
+<blockquote>
+Decode the Base64 encoded string <span class="arg">x</span>.</blockquote>
+</div>
+<div class="section" id="base64-encode-x">
+<h2><a class="toc-backref" href="#id18">BASE64_ENCODE <em>(x)</em></a></h2>
+<blockquote>
+Encode the string <span class="arg">x</span> use Base64.</blockquote>
+</div>
+<div class="section" id="cast-flag-x">
+<h2><a class="toc-backref" href="#id19">CAST <em>(flag, x)</em></a></h2>
+<blockquote>
+<p>Convert the type of <span class="arg">x</span> to a type specified by <span class="arg">flag</span>.  The
+values of <span class="arg">flag</span> are <span class="const">&quot;i[nteger]&quot;</span>, <span class="const">&quot;o[ctal]&quot;</span>,
+<span class="const">&quot;h[exadecimal]&quot;</span>, <span class="const">&quot;f[loat]&quot;</span>, and <span class="const">&quot;s[tring]&quot;</span>.</p>
+<p>For <span class="arg">x</span> starts with <span class="const">0x</span> or <span class="const">0X</span>, <span class="const">&quot;integer&quot;</span>
+<span class="arg">flag</span> behaves as <span class="const">&quot;hexadecimal&quot;</span> <span class="arg">flag</span>.  For <span class="arg">x</span>
+starts with <span class="const">0</span>, <span class="const">&quot;integer&quot;</span> <span class="arg">flag</span> behaves as
+<span class="const">&quot;octal&quot;</span> <span class="arg">flag</span>.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+CAST(&quot;int&quot;, 1.345) -&gt; 1
+CAST(&quot;dec&quot;, &quot;010&quot;) -&gt; 10
+CAST(&quot;hex&quot;, &quot;010&quot;) -&gt; 16
+</pre>
+</blockquote>
+</div>
+<div class="section" id="concat-a-b">
+<h2><a class="toc-backref" href="#id20">CONCAT <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Return a string which is the concatenation of the values <span class="arg">a[, b,
+...]</span>.</p>
+<p>Example:</p>
+<pre class="literal-block">
+CONCAT('a', 1, 2, 3) -&gt; a123
+</pre>
+</blockquote>
+</div>
+<div class="section" id="context">
+<h2><a class="toc-backref" href="#id21">CONTEXT <em>()</em></a></h2>
+<blockquote>
+Return a mapping of the rendered context.</blockquote>
+</div>
+<div class="section" id="date-format-x-format">
+<h2><a class="toc-backref" href="#id22">DATE_FORMAT <em>(x, format)</em></a></h2>
+<blockquote>
+<p>Formats <span class="arg">x</span> according to the format specification <span class="arg">format</span> (see
+'man 3 strftime').  The argument <span class="arg">x</span> is the number of seconds elapsed
+since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).</p>
+<p>Example:</p>
+<pre class="literal-block">
+DATE_FORMAT(1200490323, &quot;%Y-%m-%d %H:%M:%S&quot;) -&gt; 2008-01-16 16:32:03
+</pre>
+</blockquote>
+</div>
+<div class="section" id="default-x-y">
+<h2><a class="toc-backref" href="#id23">DEFAULT <em>(x, y)</em></a></h2>
+<blockquote>
+<p>If <span class="arg">x</span> is nonzero return <span class="arg">x</span> else return <span class="arg">y</span>.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+DEFAULT(&quot;&quot;, &quot;default_string&quot;)   -&gt; default_string
+DEFAULT(nonexistent, &quot;default&quot;) -&gt; default
+DEFAULT(0, 1)                   -&gt; 1
+</pre>
+</blockquote>
+</div>
+<div class="section" id="defined-a-b">
+<h2><a class="toc-backref" href="#id24">DEFINED <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+If all of <span class="arg">a[, b, ...]</span> exist return <span class="const">1</span> else return
+<span class="const">0</span>.</blockquote>
+</div>
+<div class="section" id="error">
+<h2><a class="toc-backref" href="#id25">ERROR <em>()</em></a></h2>
+<blockquote>
+Create runtime error.</blockquote>
+</div>
+<div class="section" id="form-param-x-y">
+<h2><a class="toc-backref" href="#id26">FORM_PARAM <em>(x, y)</em></a></h2>
+<blockquote>
+<p>With name <span class="arg">x</span> and value <span class="arg">y</span>, output a hidden field of HTML form.</p>
+<p>It is equivalent to the next:</p>
+<pre class="literal-block">
+&lt;TMPL_verbose&gt;
+&lt;TMPL_if y&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;x&quot; value=&quot;&lt;TMPL_var URLESCAPE(y)&gt;&quot;&gt;
+&lt;/TMPL_if&gt;
+&lt;/TMPL_verbose&gt;
+</pre>
+</blockquote>
+</div>
+<div class="section" id="gettext-msgid-msgid-plural-n-domain">
+<span id="gettext"></span><h2><a class="toc-backref" href="#id27">GETTEXT <em>(msgid[, msgid_plural, n][, domain])</em></a></h2>
+<blockquote>
+<p>Translate a text string <span class="arg">msgid</span> into the user's native language, by
+looking up the translation in a message catalog.</p>
+<p>If a translation was found, the message is converted to the locale's
+codeset and returned. Otherwise <span class="arg">msgid</span> or <span class="arg">msgid_plural</span> is
+returned.</p>
+<p>The appropriate plural form depends on the number <span class="arg">n</span> and the language
+of the message catalog where the translation was found.</p>
+<p>The argument <span class="arg">domain</span> is a set of translatable messages.</p>
+<p>The function <span class="func">_()</span> is alias of <span class="func">GETTEXT()</span>.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+GETTEXT(&quot;Hello, World!&quot;)                                -&gt; Привет, Мир!
+_(&quot;Hello, World!&quot;)                                      -&gt; Привет, Мир!
+_(&quot;Hello, World!&quot;, &quot;mydomain&quot;)                          -&gt; Привет, Другой Мир!
+SPRINTF(_(&quot;%d hour&quot;, &quot;%d hours&quot;, 1), 1)                 -&gt; 1 час
+SPRINTF(_(&quot;%d minute&quot;, &quot;%d minutes&quot;, 2, &quot;mydomain&quot;), 2) -&gt; 2 минуты
+</pre>
+</blockquote>
+</div>
+<div class="section" id="get-type-x">
+<h2><a class="toc-backref" href="#id28">GET_TYPE <em>(x)</em></a></h2>
+<blockquote>
+Return a printable type of <span class="arg">x</span>.  The types are <span class="const">&quot;*UNDEF*&quot;</span> for
+undefined variables, <span class="const">&quot;STRING&quot;</span> for strings, <span class="const">&quot;INTEGER&quot;</span> for
+integers, <span class="const">&quot;REAL&quot;</span> for floating-point numbers, <span class="const">&quot;HASH&quot;</span> for
+mappings, and <span class="const">&quot;ARRAY&quot;</span> for arrays.</blockquote>
+</div>
+<div class="section" id="hash-keys-x">
+<h2><a class="toc-backref" href="#id29">HASH_KEYS <em>(x)</em></a></h2>
+<blockquote>
+Return an array of <span class="arg">x</span>'s keys.  The argument <span class="arg">x</span> should be
+mapping.</blockquote>
+</div>
+<div class="section" id="hmac-md5-x-key">
+<h2><a class="toc-backref" href="#id30">HMAC_MD5 <em>(x, key)</em></a></h2>
+<blockquote>
+Compute a hash value for the specified <span class="arg">x</span> using the supplied <span class="arg">key</span>.</blockquote>
+</div>
+<div class="section" id="hostname">
+<h2><a class="toc-backref" href="#id31">HOSTNAME <em>()</em></a></h2>
+<blockquote>
+Return the hostname of the current processor.</blockquote>
+</div>
+<div class="section" id="href-param-x-y">
+<h2><a class="toc-backref" href="#id32">HREF_PARAM <em>(x, y)</em></a></h2>
+<blockquote>
+<p>With name <span class="arg">x</span> and value <span class="arg">y</span>, output parameters of HTML links.</p>
+<p>It is equivalent to the next:</p>
+<pre class="literal-block">
+&lt;TMPL_if a&gt;x=&lt;TMPL_var URLESCAPE(y)&gt;&lt;/TMPL_if&gt;
+</pre>
+</blockquote>
+</div>
+<div class="section" id="htmlescape-a-b">
+<h2><a class="toc-backref" href="#id33">HTMLESCAPE <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Escape <span class="const">&amp;</span>, <span class="const">&lt;</span>, <span class="const">'</span>, <span class="const">&quot;</span>, and <span class="const">&gt;</span> in
+the strings of data <span class="arg">a[, b, ...]</span>.</p>
+<p><span class="func">HTMLESCAPE()</span> returns result of concatenation of the strings
+<span class="arg">a[, b, ...]</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="iconv-x-src-dst-flags">
+<h2><a class="toc-backref" href="#id34">ICONV <em>(x, src, dst[, flags])</em></a></h2>
+<blockquote>
+<p>Convert the string <span class="arg">x</span> from the coded character set <span class="arg">src</span> to
+<span class="arg">dst</span>.</p>
+<p>The argument <span class="arg">flags</span> are <span class="const">'i'</span> or <span class="const">'I'</span> for discarding
+illegal sequence, and <span class="const">'t'</span> or <span class="const">'T'</span> for enabling transliteration
+in the conversion.  The argument <span class="arg">flags</span> works in FreeBSD only.</p>
+<p>See 'iconv -l` for list which contains all the coded character sets known.</p>
+</blockquote>
+</div>
+<div class="section" id="in-array-x-array">
+<h2><a class="toc-backref" href="#id35">IN_ARRAY <em>(x, array)</em></a></h2>
+<blockquote>
+Return <span class="const">1</span> if <span class="arg">x</span> was found in <span class="arg">array</span>, else return
+<span class="const">0</span>.</blockquote>
+</div>
+<div class="section" id="in-set-x-a-b">
+<h2><a class="toc-backref" href="#id36">IN_SET <em>(x, a[, b, ...])</em></a></h2>
+<blockquote>
+Return <span class="const">1</span> if <span class="arg">x</span> was found in <span class="arg">a[, b, ...]</span>, else return
+<span class="const">0</span>.</blockquote>
+</div>
+<div class="section" id="jsonescape-a-b">
+<h2><a class="toc-backref" href="#id37">JSONESCAPE <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Escape <span class="const">&quot;</span>, <span class="const">\</span>, <span class="const">/</span>, <span class="const">\b</span>, <span class="const">\f</span>,
+<span class="const">\n</span>, <span class="const">\r</span>, <span class="const">\t</span>, <span class="const">'</span>, <span class="const">\v</span>, and
+<span class="const">\0</span> in the strings of data <span class="arg">a[, b, ...]</span>.  If character's
+value is smaller than <span class="const">\u0032</span>, it is encoded with <span class="const">\uXXXX</span>
+format for hex digits <span class="const">XXXX</span>.</p>
+<p><span class="func">JSONESCAPE()</span> returns result of concatenation of the strings
+<span class="arg">a[, b, ...]</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="json-x">
+<h2><a class="toc-backref" href="#id38">JSON <em>(x)</em></a></h2>
+<blockquote>
+Serialize <span class="arg">x</span> to the JavaScript Object Notation (JSON).</blockquote>
+</div>
+<div class="section" id="list-element-a-b-x">
+<h2><a class="toc-backref" href="#id39">LIST_ELEMENT <em>(a[, b, ...], x)</em></a></h2>
+<blockquote>
+Return an element from <span class="arg">a[, b, ...]</span> by the index <span class="arg">x</span>.</blockquote>
+</div>
+<div class="section" id="list-a-b">
+<h2><a class="toc-backref" href="#id40">LIST <em>([a, b, ...])</em></a></h2>
+<blockquote>
+Return an array of <span class="arg">[a, b, ...]</span>. It can be empty.</blockquote>
+</div>
+<div class="section" id="log-x-base">
+<h2><a class="toc-backref" href="#id41">LOG <em>(x[, base])</em></a></h2>
+<blockquote>
+<p>With one argument, return the natural logarithm of <span class="arg">x</span> (to base
+<span class="const">e</span>).</p>
+<p>With two arguments, return the logarithm of <span class="arg">x</span> to the given
+<span class="arg">base</span>, calculated as <span class="func">LOG(x) / LOG(base)</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="max-a-b">
+<h2><a class="toc-backref" href="#id42">MAX <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+Return the largest item of <span class="arg">a[, b, ...]</span>.</blockquote>
+</div>
+<div class="section" id="mb-size-x">
+<h2><a class="toc-backref" href="#id43">MB_SIZE <em>(x)</em></a></h2>
+<blockquote>
+<p>MB_ prefix marks function, which works with multibyte strings.</p>
+<p>See <a class="reference internal" href="#size">SIZE</a>.</p>
+</blockquote>
+</div>
+<div class="section" id="mb-substr-x-offset-bytes-y">
+<h2><a class="toc-backref" href="#id44">MB_SUBSTR <em>(x, offset[, bytes[, y]]])</em></a></h2>
+<blockquote>
+<p>MB_ prefix marks function, which works with multibyte strings.</p>
+<p>See <a class="reference internal" href="#substr">SUBSTR</a>.</p>
+</blockquote>
+</div>
+<div class="section" id="mb-truncate-x-offest-addon">
+<h2><a class="toc-backref" href="#id45">MB_TRUNCATE <em>(x, offest[, addon])</em></a></h2>
+<blockquote>
+<p>MB_ prefix marks function, which works with multibyte strings.</p>
+<p>See <a class="reference internal" href="#truncate">TRUNCATE</a>.</p>
+</blockquote>
+</div>
+<div class="section" id="md5-a-b">
+<h2><a class="toc-backref" href="#id46">MD5 <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+Return the MD5 hash of <span class="arg">a[, b, ...]</span>.</blockquote>
+</div>
+<div class="section" id="min-a-b">
+<h2><a class="toc-backref" href="#id47">MIN <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+Return the smallest item of <span class="arg">a[, b, ...]</span>.</blockquote>
+</div>
+<div class="section" id="num-format-x-y">
+<h2><a class="toc-backref" href="#id48">NUM_FORMAT <em>(x, y)</em></a></h2>
+<blockquote>
+<p>Return the formatted integer <span class="arg">x</span> with period <span class="arg">y</span>.</p>
+<p>Example:</p>
+<pre class="literal-block">
+NUM_FORMAT(1234567, &quot;,&quot;) -&gt; 1,234,567
+</pre>
+</blockquote>
+</div>
+<div class="section" id="obj-dump-a-b">
+<h2><a class="toc-backref" href="#id49">OBJ_DUMP <em>([a, b, ...])</em></a></h2>
+<blockquote>
+Return dump of the arguments <span class="arg">[a, b, ...]</span>.  Return dump of all variables
+if no arguments.</blockquote>
+</div>
+<div class="section" id="random-min-max">
+<h2><a class="toc-backref" href="#id50">RANDOM <em>([[min,] max])</em></a></h2>
+<blockquote>
+Return a random number in the range (<span class="arg">min</span>, <span class="arg">max</span>].  The range
+(<span class="arg">min</span>, <span class="arg">max</span>] equals to <span class="const">0 .. RAND_MAX</span>, if no arguments.</blockquote>
+</div>
+<div class="section" id="size-x">
+<span id="size"></span><h2><a class="toc-backref" href="#id51">SIZE <em>(x)</em></a></h2>
+<blockquote>
+Return the number of items of a sequence <span class="arg">x</span>.</blockquote>
+</div>
+<div class="section" id="sprintf-format-a-b">
+<h2><a class="toc-backref" href="#id52">SPRINTF <em>(format, a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Produce output according to a format.  After the argument <span class="arg">format</span>, it
+expects at least as many additional arguments as specified in
+<span class="arg">format</span>.</p>
+<p>The argument <span class="arg">format</span> can optionaly contain embedded format tags that
+are substituted by the values specified in <span class="arg">a[, b, ...]</span>.</p>
+<p>See 'man 3 printf' for more information.</p>
+</blockquote>
+</div>
+<div class="section" id="substr-x-offset-bytes-y">
+<span id="substr"></span><h2><a class="toc-backref" href="#id53">SUBSTR <em>(x, offset[, bytes[, y]]])</em></a></h2>
+<blockquote>
+Return the characters in the string <span class="arg">x</span> starting at a specified
+position <span class="arg">offset</span> and continuing for a specified number of characters
+<span class="arg">bytes</span>.  If the argument <span class="arg">y</span> exists, then return the string
+<span class="arg">x</span> with replaced the characters with <span class="arg">y</span>.</blockquote>
+</div>
+<div class="section" id="truncate-x-offest-addon">
+<span id="truncate"></span><h2><a class="toc-backref" href="#id54">TRUNCATE <em>(x, offest[, addon])</em></a></h2>
+<blockquote>
+<p>Return the string <span class="arg">x</span>, if it is less than or equal to <span class="arg">offset</span>
+characters long.  If it is longer, it truncates the string.</p>
+<p>Return the string with <span class="arg">addon</span>, if the argument <span class="arg">addon</span> exists.</p>
+</blockquote>
+</div>
+<div class="section" id="uriescape-a-b">
+<h2><a class="toc-backref" href="#id55">URIESCAPE <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Convert characters of the strings <span class="arg">a[, b, ...]</span> into their
+corresponding escape sequences.</p>
+<p><span class="func">URIESCAPE()</span> returns result of concatenation of the strings
+<span class="arg">a[, b, ...]</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="urlescape-a-b">
+<h2><a class="toc-backref" href="#id56">URLESCAPE <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Convert characters of the strings <span class="arg">a[, b, ...]</span> into their
+corresponding escape sequences.  It replaces spaces with <span class="const">&quot;+&quot;</span> instead
+of <span class="const">&quot;%20&quot;</span>.</p>
+<p><span class="func">URLESCAPE()</span> returns result of concatenation of the strings
+<span class="arg">a[, b, ...]</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="version-x">
+<h2><a class="toc-backref" href="#id57">VERSION <em>([x])</em></a></h2>
+<blockquote>
+<p>Return the current version of CT++.</p>
+<p>Return extended information if <span class="arg">x</span> equals to <span class="const">&quot;full&quot;</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="wmlescape-a-b">
+<h2><a class="toc-backref" href="#id58">WMLESCAPE <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Replace <span class="const">&lt;</span> with <span class="const">&amp;gt;</span>, <span class="const">&gt;</span> with <span class="const">&amp;lt;</span>,
+<span class="const">&quot;</span> with <span class="const">&amp;quot;</span>, <span class="const">'</span> with <span class="const">&amp;apos;</span>,
+<span class="const">$</span> with <span class="const">$$</span>, and <span class="const">&amp;</span> with <span class="const">&amp;amp;</span> in the
+strings of data <span class="arg">a[, b, ...]</span>.</p>
+<p><span class="func">WMLESCAPE()</span> returns result of concatenation of the strings
+<span class="arg">a[, b, ...]</span>.</p>
+</blockquote>
+</div>
+<div class="section" id="xmlescape-a-b">
+<h2><a class="toc-backref" href="#id59">XMLESCAPE <em>(a[, b, ...])</em></a></h2>
+<blockquote>
+<p>Replace <span class="const">&lt;</span> with <span class="const">&amp;gt;</span>, <span class="const">&gt;</span> with <span class="const">&amp;lt;</span>,
+<span class="const">&quot;</span> with <span class="const">&amp;quot;</span>, <span class="const">'</span> with <span class="const">&amp;apos;</span>, and
+<span class="const">&amp;</span> with <span class="const">&amp;amp;</span> in the strings of data <span class="arg">a[, b, ...]</span>.</p>
+<p><span class="func">XMLESCAPE()</span> returns result of concatenation of the strings
+<span class="arg">a[, b, ...]</span>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</body>
+</html>
